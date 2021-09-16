@@ -1,6 +1,7 @@
 // @dart=2.8
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:welcome/pages/backButtonClose.dart';
 import 'package:welcome/screens/lohin.dart';
 import 'package:welcome/screens/newsScreen.dart';
 
@@ -70,9 +71,11 @@ class _AppState extends State<App> {
     print(user);
     return Scaffold(
       body: user != null
-          ? HomePage(
-              user: user,
-            )
+          ? OutsideDoor()
+
+          // HomePage(
+          //     user: user,
+          //   )
           : PhoneLogin(),
     );
   }

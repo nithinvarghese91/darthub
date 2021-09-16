@@ -96,6 +96,10 @@ class _OTPScreenState extends State<OTPScreen> {
     print("isValid - $isCodeSent");
     print("mobiel ${widget.mobileNumber}");
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+      ),
       backgroundColor: Colors.white,
       // appBar: AppBar(
       //   elevation: 0.0,

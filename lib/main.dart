@@ -23,8 +23,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => DemoProvider(),
-      child:
-          MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen()),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+        // theme: ThemeData.dark(),
+      ),
     );
   }
 }

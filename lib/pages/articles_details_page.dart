@@ -88,9 +88,14 @@ class ArticlePage extends StatelessWidget {
                       decoration: BoxDecoration(
                         //let's add the height
 
-                        image: DecorationImage(image: NetworkImage(
+                        image: DecorationImage(
+                          image: NetworkImage(
                             // article.urlToImage
-                            article.featuredImage), fit: BoxFit.cover),
+                            article.featuredImage,
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
@@ -316,14 +321,17 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              article.content,
-              style: TextStyle(
-                  color: Color(0xffff323C45),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 13,
-                  height: 1.5,
-                  fontFamily: 'Inria'),
+            Padding(
+              padding: const EdgeInsets.only(left: 6, right: 6),
+              child: Text(
+                article.content,
+                style: TextStyle(
+                    color: Color(0xffff323C45),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                    height: 1.5,
+                    fontFamily: 'Inria'),
+              ),
             )
           ],
         ),

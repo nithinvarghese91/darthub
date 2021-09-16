@@ -138,7 +138,7 @@ Widget bodyTileCol(Articles article, BuildContext context) {
 
                       image: DecorationImage(image: NetworkImage(
                           // article.urlToImage
-                          article.featuredImage), fit: BoxFit.cover),
+                          article.featuredImage), fit: BoxFit.fill),
                       borderRadius: BorderRadius.circular(7.0),
                     ),
                   ),
