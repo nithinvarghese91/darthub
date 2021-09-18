@@ -43,7 +43,7 @@ class ArticlePage extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                'Gst News',
+                'Latest News & Updates',
                 style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
@@ -172,7 +172,7 @@ class ArticlePage extends StatelessWidget {
                 style: TextStyle(
                     color: Color(0xffff323C45),
                     fontWeight: FontWeight.w400,
-                    fontSize: 13,
+                    fontSize: 14,
                     height: 1.5,
                     fontFamily: 'Inria'),
               ),
@@ -221,7 +221,7 @@ class DetailsScreen extends StatelessWidget {
               width: 20,
             ),
             Text(
-              'Gst News',
+              'Gst News &',
               style: TextStyle(
                   fontSize: 14,
                   color: Colors.grey,
@@ -328,7 +328,7 @@ class DetailsScreen extends StatelessWidget {
                 style: TextStyle(
                     color: Color(0xffff323C45),
                     fontWeight: FontWeight.w400,
-                    fontSize: 13,
+                    fontSize: 14,
                     height: 1.5,
                     fontFamily: 'Inria'),
               ),

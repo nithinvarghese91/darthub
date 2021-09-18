@@ -1,10 +1,14 @@
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:welcome/model/article_model.dart';
 import 'package:welcome/pages/articles_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:welcome/provider/demoProvider.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 Widget customListTile(
+
     // Article article,
 
     Articles article,
@@ -86,6 +90,10 @@ Widget customListTile(
 //original columnbody gst central
 
 Widget bodyTileCol(Articles article, BuildContext context) {
+  new Future.delayed(Duration(seconds: 2), () {
+    // deleayed code here
+    print('delayed execution');
+  });
   var timeDate = DateFormat('MMM d, yyyy')
       .format(DateTime.parse(article.publishedAt))
       .toString();
@@ -131,17 +139,18 @@ Widget bodyTileCol(Articles article, BuildContext context) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height * .26,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      //let's add the height
+                      height: MediaQuery.of(context).size.height * .26,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        //let's add the height
 
-                      image: DecorationImage(image: NetworkImage(
-                          // article.urlToImage
-                          article.featuredImage), fit: BoxFit.fill),
-                      borderRadius: BorderRadius.circular(7.0),
-                    ),
-                  ),
+                        image: DecorationImage(image: NetworkImage(
+                            // article.urlToImage
+                            article.featuredImage), fit: BoxFit.fill),
+                        borderRadius: BorderRadius.circular(7.0),
+                      ),
+                      child: Provider.of<DemoProvider>(context, listen: false)
+                          .circularIndicator()),
                   // SizedBox(
                   //   height: 18,
                   // ),
@@ -185,13 +194,23 @@ Widget bodyTileCol(Articles article, BuildContext context) {
                           SizedBox(
                             height: 5,
                           ),
-                          Transform.scale(
-                            alignment: Alignment.bottomCenter,
-                            scale: 1.4,
-                            child: SvgPicture.asset(
-                              'assets/svg/share.svg',
-                              color: Color(0xFFFF323C45),
+                          GestureDetector(
+                            child: Transform.scale(
+                              alignment: Alignment.bottomCenter,
+                              scale: 1.4,
+                              child: SvgPicture.asset(
+                                'assets/svg/share.svg',
+                                color: Color(0xFFFF323C45),
+                              ),
                             ),
+                            onTap: () {
+                              FlutterShare.share(
+                                title: article.title,
+                                text: article.content,
+                                // linkUrl: 'https://flutter.dev/',
+                                // chooserTitle: 'Example Chooser Title'
+                              );
+                            },
                           ),
                         ],
                       ),

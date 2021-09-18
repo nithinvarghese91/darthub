@@ -1,5 +1,8 @@
 // @dart=2.8
 
+import 'dart:async';
+
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -18,6 +21,7 @@ import 'package:welcome/screens/detailsScreen.dart';
 import 'package:welcome/screens/drawerScreen.dart';
 import 'package:welcome/screens/lohin.dart';
 import 'package:welcome/screens/searchScreen.dart';
+import 'otpScreen.dart';
 // import 'package:gstcentral/constants.dart';
 
 //new credentials for main scree
@@ -32,7 +36,10 @@ class HomePage extends StatefulWidget {
   User user;
 
   final _auth = FirebaseAuth.instance;
-  HomePage({Key key, this.user});
+  HomePage({
+    Key key,
+    this.user,
+  });
   //   : assert(user != null),
   //  super(key: key);
   @override
@@ -57,9 +64,18 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    //FirebaseCrashlytics.instance.crash();
     if (!mounted) return;
+    print('user is');
+    print(widget.user);
 
     // getItemsStream();
+
+    Timer(const Duration(seconds: 5), () {
+      setState(() {
+        Provider.of<DemoProvider>(context, listen: false).circleColorChanger();
+      });
+    });
   }
 
   int _selectedIndex = 0;

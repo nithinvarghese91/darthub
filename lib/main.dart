@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:welcome/Handler.dart';
@@ -16,6 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 }
 
 class MyApp extends StatelessWidget {
@@ -24,6 +26,8 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => DemoProvider(),
       child: MaterialApp(
+        //theme: ThemeData.dark(),
+        //themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
         // theme: ThemeData.dark(),

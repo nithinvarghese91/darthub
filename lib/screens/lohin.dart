@@ -1,6 +1,8 @@
 // @dart=2.8
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:welcome/provider/demoProvider.dart';
 
 import './otpScreen.dart';
 import 'package:flutter/material.dart';
@@ -133,19 +135,20 @@ class _PhoneLoginState extends State<PhoneLogin> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Transform.scale(
-                        scale: .95,
+                        scale: 1.2,
                         child: SvgPicture.asset('assets/svg/Group (1).svg'),
                       ),
                       SizedBox(
-                        height: 13,
+                        height: 23,
                       ),
                       Text(
                         "ALL-IN-ONE GST PLATFORM",
                         style: TextStyle(
                             fontSize: 10,
                             letterSpacing: 1.2,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[800]),
+                            fontFamily: 'inter',
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFFF323C45)),
                       )
                     ],
                   ),
@@ -174,12 +177,13 @@ class _PhoneLoginState extends State<PhoneLogin> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Let's get Started",
+                          "Let's Get Started",
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontSize: 17,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey[800]),
+                              fontFamily: 'inter',
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFFFF323C45)),
                         ),
                         SizedBox(
                           height: 10,
@@ -188,22 +192,24 @@ class _PhoneLoginState extends State<PhoneLogin> {
                           "India's most-trusted platform for GST Updated & Resources",
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                            wordSpacing: 4,
+                            wordSpacing: 2,
+                            fontFamily: 'inter',
                             //letterSpacing: .5,
-                            fontSize: 11,
-                            color: Colors.grey,
+                            fontSize: 12,
+                            color: Color(0xFFFF939393),
                           ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         Text(
-                          "Enter your mobile number",
+                          "Enter Your Mobile Number",
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                              color: Colors.grey[800],
+                              fontFamily: 'inter',
                               fontSize: 14,
-                              fontWeight: FontWeight.w500),
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFFFF323C45)),
                         ),
                         SizedBox(
                           height: 7,
@@ -255,7 +261,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
         // margin: EdgeInsets.only(
         //   top: MediaQuery.of(context).size.height * 81 / 100,
         // ),
-        height: 46,
+        height: 50,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -299,7 +305,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
             Expanded(
               flex: 1,
               child: Container(
-                height: 51,
+                height: 55,
                 decoration: BoxDecoration(
                     color: Colors.grey[100],
                     border: Border.all(width: .5, color: Colors.grey[400]),
@@ -319,7 +325,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
             ),
             Expanded(
               child: Container(
-                height: 51,
+                height: 55,
                 decoration: BoxDecoration(
                     border: Border.all(width: .5, color: Colors.grey[400]),
                     borderRadius: BorderRadius.only(

@@ -1,8 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:welcome/provider/demoProvider.dart';
 import 'package:welcome/screens/lohin.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -16,7 +19,7 @@ class DrawerScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height / 3.5,
+              height: MediaQuery.of(context).size.height / 5,
               color: Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -75,7 +78,10 @@ class DrawerScreen extends StatelessWidget {
                                 )
                               ],
                             ),
-                            Text("+91 9656958282",
+                            Text(
+                                Provider.of<DemoProvider>(context,
+                                        listen: false)
+                                    .mobnumber,
                                 style: TextStyle(
                                     wordSpacing: 1,
                                     fontSize: 11,
@@ -91,7 +97,7 @@ class DrawerScreen extends StatelessWidget {
             ),
             Container(
               height: MediaQuery.of(context).size.height * .06,
-              margin: EdgeInsets.only(left: 20, right: 20),
+              margin: EdgeInsets.only(left: 40, right: 40),
               decoration: BoxDecoration(
                   color: Color(0xffff0098DE),
                   borderRadius: BorderRadius.circular(5)),
@@ -160,12 +166,22 @@ class DrawerScreen extends StatelessWidget {
                 height: 0,
                 width: 0,
                 scale: 1.5),
-            drawerTiles(context,
-                svg: 'iconshare',
-                text: 'Share with friends',
-                height: 0,
-                width: 0,
-                scale: 1),
+            GestureDetector(
+              child: drawerTiles(context,
+                  svg: 'iconshare',
+                  text: 'Share with friends',
+                  height: 0,
+                  width: 0,
+                  scale: 1),
+              onTap: () {
+                FlutterShare.share(
+                  title: 'Share this apllication',
+                  //text: article.content,
+                  // linkUrl: 'https://flutter.dev/',
+                  // chooserTitle: 'Example Chooser Title'
+                );
+              },
+            ),
             GestureDetector(
               child: drawerTiles(context,
                   svg: 'logout',
@@ -179,6 +195,30 @@ class DrawerScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => PhoneLogin()));
               },
             ),
+            Spacer(flex: 5),
+            Container(
+              child: Row(
+                children: [
+                  Spacer(),
+                  Transform.scale(
+                    scale: 1,
+                    child: SvgPicture.asset(
+                        'assets/svg/Made with ❤️ in India..svg'),
+                    alignment: Alignment.bottomCenter,
+                  ),
+                  SizedBox(
+                    width: 6,
+                  ),
+                  Text(
+                    "by insibe.com       Version 2.0.1",
+                    style: TextStyle(fontSize: 9),
+                  ),
+                  Spacer()
+                ],
+              ),
+              alignment: Alignment.bottomCenter,
+            ),
+            Spacer(flex: 1)
           ],
         ),
       ),

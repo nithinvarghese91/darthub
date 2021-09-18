@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
+import 'package:welcome/screens/drawerScreen.dart';
+// import 'package:welcome/constants/constants.dart';
 import 'package:welcome/widgets/widgets.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -98,11 +100,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
     print(_events.length);
     return Scaffold(
       appBar: appBarMainPage(context),
+      drawer: DrawerScreen(),
       body: SafeArea(
         child: Calendar(
           startOnMonday: true,
           weekDays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
           events: _events,
+
           isExpandable: true,
           eventDoneColor: Colors.green,
           selectedColor: Colors.pink,

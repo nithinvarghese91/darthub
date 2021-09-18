@@ -4,6 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:welcome/pages/termsandconditions.dart';
+import 'package:welcome/provider/demoProvider.dart';
 import 'package:welcome/screens/newsScreen.dart';
 import './newsScreen.dart';
 //import 'package:pin_input_text_field/pin_input_text_field.dart';
@@ -60,7 +63,7 @@ class _OTPScreenState extends State<OTPScreen> {
         if (_pinEditingController.text.length == 6) {
           _onFormSubmitted();
         } else {
-          showToast("Invalid OTP", Colors.red);
+          //  showToast("Invalid OTP", Colors.red);
         }
       });
 
@@ -71,7 +74,9 @@ class _OTPScreenState extends State<OTPScreen> {
   @override
   void initState() {
     super.initState();
+
     _onVerifyCode();
+
     // if (_pinEditingController.text.length == 6) {
     //   _onFormSubmitted();
     // } else {
@@ -97,8 +102,36 @@ class _OTPScreenState extends State<OTPScreen> {
     print("mobiel ${widget.mobileNumber}");
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        //  automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 0,
+        leading: GestureDetector(
+          child: Transform.scale(
+            scale: .5,
+            child: SvgPicture.asset('assets/svg/arrow.svg'),
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            print('backbutton pressed');
+          },
+        ),
+        title:
+            // SizedBox(
+            //   width: 7,
+            // ),
+
+            // SizedBox(
+            //   width: 30,
+            // ),
+            Text(
+          "Enter Verification code",
+          style: TextStyle(
+              fontSize: 19,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[800]),
+        ),
+
+        centerTitle: true,
       ),
       backgroundColor: Colors.white,
       // appBar: AppBar(
@@ -152,17 +185,17 @@ class _OTPScreenState extends State<OTPScreen> {
             Spacer(
               flex: 2,
             ),
-            Text(
-              "Enter Verification code",
-              style: TextStyle(
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[800]),
-            ),
+            // Text(
+            //   "Enter Verification code",
+            //   style: TextStyle(
+            //       fontSize: 19,
+            //       fontWeight: FontWeight.bold,
+            //       color: Colors.transparent),
+            // ),
 
-            SizedBox(
-              height: 16,
-            ),
+            // SizedBox(
+            //   height: 16,
+            // ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -223,7 +256,16 @@ class _OTPScreenState extends State<OTPScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    validate((fn) {});
+                    // validate((fn) {});
+
+                    if (isValid) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                OTPScreen(mobileNumber: widget.mobileNumber),
+                          ));
+                    }
                   },
                   child: Text(
                     "Resend OTP ",
@@ -247,7 +289,10 @@ class _OTPScreenState extends State<OTPScreen> {
                       fontWeight: FontWeight.bold),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Terms()));
+                  },
                   child: Text(
                     "Terms & Conditions",
                     style: TextStyle(
@@ -377,6 +422,7 @@ class _OTPScreenState extends State<OTPScreen> {
       if (value.user != null) {
         // Handle loogged in state
         print(value.user.phoneNumber);
+
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(

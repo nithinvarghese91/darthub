@@ -82,6 +82,7 @@ class _SplashState extends State<Splash> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
+                      fontFamily: 'inter',
                       wordSpacing: 1),
                 ),
               ],
@@ -117,7 +118,11 @@ class _SplashState extends State<Splash> {
                 ),
                 Text(
                   "Version v.001 Beta",
-                  style: TextStyle(fontSize: 9),
+                  style: TextStyle(
+                    // color: Color(0xFFFF939393),
+                    fontSize: 10,
+                    fontFamily: 'inter',
+                  ),
                 ),
                 SizedBox(
                   height: 5,

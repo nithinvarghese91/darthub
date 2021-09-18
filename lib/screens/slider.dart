@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:welcome/pages/articles_details_page.dart';
+import 'package:welcome/screens/drawerScreen.dart';
 import 'package:welcome/widgets/widgets.dart';
 
 class Glance extends StatelessWidget {
@@ -19,6 +20,7 @@ class Glance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarMainPage(context),
+      drawer: DrawerScreen(),
       body: Container(
         child: Swiper(
           itemCount: images.length,

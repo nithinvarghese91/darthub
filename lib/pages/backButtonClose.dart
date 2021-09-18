@@ -4,6 +4,8 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:welcome/provider/demoProvider.dart';
 import 'package:welcome/screens/newsScreen.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
@@ -26,6 +28,8 @@ class _BackButtonState extends State<OutsideDoor> {
   void initState() {
     super.initState();
     getCurrentUser();
+    Provider.of<DemoProvider>(context, listen: false)
+        .changeValue(user.phoneNumber);
   }
 
   void getCurrentUser() async {

@@ -10,6 +10,7 @@ class Guides extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: appBarMainPage(context),
         drawer: DrawerScreen(),
         body: Column(

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -18,7 +20,14 @@ import 'package:welcome/services/api_service.dart';
 import 'package:welcome/screens/drawerScreen.dart';
 
 ApiService client = ApiService();
+
 User user;
+roundIndicator() {
+  Timer(const Duration(seconds: 5), () {
+    BuildContext context;
+    Provider.of<DemoProvider>(context, listen: false).circleColorChanger();
+  });
+}
 
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 final _auth = FirebaseAuth.instance;
@@ -67,6 +76,7 @@ Widget MainBody(BuildContext context) {
                           fontFamily: 'inter',
                           fontWeight: FontWeight.w600)),
                   onTap: () {
+                    //roundIndicator();
                     //   setState(() {
                     //     changeColor = 1;
                     //   });
@@ -179,6 +189,9 @@ Widget MainBody(BuildContext context) {
       //             // offset: Offset(1, 0)
       //           )
       //         ])),
+      SizedBox(
+        height: 12,
+      )
     ],
   );
 }
