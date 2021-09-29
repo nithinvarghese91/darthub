@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:welcome/model/article_model.dart';
 import 'package:http/http.dart';
+import 'package:welcome/screens/noInternet.dart';
 
 //Now let's make the HTTP request services
 // this class will alows us to make a simple get http request

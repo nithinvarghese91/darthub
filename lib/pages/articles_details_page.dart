@@ -1,9 +1,11 @@
 //Now let's create the article details page
 
+import 'package:provider/provider.dart';
 import 'package:welcome/model/article_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:welcome/provider/demoProvider.dart';
 
 class ArticlePage extends StatelessWidget {
   // final Article article;
@@ -17,10 +19,13 @@ class ArticlePage extends StatelessWidget {
         .format(DateTime.parse(article.publishedAt))
         .toString();
     return Scaffold(
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
+          backgroundColor:Provider.of<DemoProvider>(context).themeMode ==
+              ThemeMode.dark
+              ? Colors.grey.shade900
+              : Colors.white,
           elevation: 1.5,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -32,7 +37,10 @@ class ArticlePage extends StatelessWidget {
               GestureDetector(
                 child: Transform.scale(
                   scale: 1,
-                  child: SvgPicture.asset('assets/svg/arrow.svg'),
+                  child: SvgPicture.asset('assets/svg/arrow.svg',color:Provider.of<DemoProvider>(context).themeMode ==
+                      ThemeMode.dark
+                      ? Colors.white
+                      : null,),
                 ),
                 onTap: () {
                   Navigator.pop(context);
@@ -46,7 +54,10 @@ class ArticlePage extends StatelessWidget {
                 'Latest News & Updates',
                 style: TextStyle(
                     fontSize: 14,
-                    color: Colors.grey,
+                    color:Provider.of<DemoProvider>(context).themeMode ==
+                        ThemeMode.dark
+                        ? Colors.white
+                        :  Colors.grey,
                     fontWeight: FontWeight.w500),
                 textAlign: TextAlign.left,
               ),
@@ -61,7 +72,12 @@ class ArticlePage extends StatelessWidget {
             // ),
             Container(
               padding: EdgeInsets.only(top: 5, bottom: 5, left: 8, right: 6.5),
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
+              decoration: BoxDecoration(color: Provider.of<DemoProvider>(context).themeMode ==
+                  ThemeMode.dark
+                  ? Colors.grey.shade900
+                  : Colors.white,
+
+                  boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(.25), //color of shadow
                   spreadRadius: .50, //spread radius
@@ -70,7 +86,10 @@ class ArticlePage extends StatelessWidget {
                 )
               ]),
               child: Container(
-                color: Colors.white,
+                color: Provider.of<DemoProvider>(context).themeMode ==
+                    ThemeMode.dark
+                    ? Colors.grey.shade900
+                    : Colors.white,
                 height: MediaQuery.of(context).size.height * .38,
                 width: double.infinity,
                 margin: EdgeInsets.only(
@@ -107,7 +126,7 @@ class ArticlePage extends StatelessWidget {
                     ),
                     Text(article.title,
                         style: TextStyle(
-                            color: Color(0xFFFF323C45),
+                           // color: Color(0xFFFF323C45),
                             fontSize: 16,
                             fontFamily: 'inter',
                             fontWeight: FontWeight.w600)),
@@ -165,12 +184,15 @@ class ArticlePage extends StatelessWidget {
             //   height: 1.5,
             // ),
             Container(
-              color: Colors.white,
+              color: Provider.of<DemoProvider>(context).themeMode ==
+                  ThemeMode.dark
+                  ? Colors.grey.shade900
+                  : Colors.white,
               padding: EdgeInsets.all(15),
               child: Text(
                 article.content,
                 style: TextStyle(
-                    color: Color(0xffff323C45),
+                    //color: Color(0xffff323C45),
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
                     height: 1.5,

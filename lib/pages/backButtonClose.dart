@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,8 @@ import 'package:welcome/provider/demoProvider.dart';
 import 'package:welcome/screens/newsScreen.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:welcome/screens/noInternet.dart';
+
 
 //Double tap to exit the app
 
@@ -28,6 +31,7 @@ class _BackButtonState extends State<OutsideDoor> {
   void initState() {
     super.initState();
     getCurrentUser();
+    Provider.of<DemoProvider>(context, listen: false).startMonitoring();
     Provider.of<DemoProvider>(context, listen: false)
         .changeValue(user.phoneNumber);
   }
@@ -91,16 +95,23 @@ class _BackButtonState extends State<OutsideDoor> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       //backgroundColor: Color(0xff0398FC),
       body: WillPopScope(
-        onWillPop: onWillPop, //here
-        child: HomePage(
-          user: user,
-        ),
+          onWillPop: onWillPop, //here
+          child:  Consumer<DemoProvider>(
 
-        //here
-      ),
+        builder: (context, model,child)
+    {
+      return model.isOnline != null ? HomePage(
+        user: user,
+      ):NoInternet();
+
+
+  })
+          //here
+          ),
     );
   }
 

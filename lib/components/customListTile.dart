@@ -90,6 +90,8 @@ Widget customListTile(
 //original columnbody gst central
 
 Widget bodyTileCol(Articles article, BuildContext context) {
+  Provider.of<DemoProvider>(context, listen: false)
+      .tabIndicator1();
   new Future.delayed(Duration(seconds: 2), () {
     // deleayed code here
     print('delayed execution');
@@ -117,7 +119,12 @@ Widget bodyTileCol(Articles article, BuildContext context) {
           ),
           Container(
             padding: EdgeInsets.only(top: 5, bottom: 5, left: 8, right: 6.5),
-            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+            decoration: BoxDecoration(color: Provider.of<DemoProvider>(context).themeMode ==
+                ThemeMode.dark
+                ? Colors.grey.shade900
+                : Colors.white,
+
+                boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(.25), //color of shadow
                 spreadRadius: .50, //spread radius
@@ -126,7 +133,10 @@ Widget bodyTileCol(Articles article, BuildContext context) {
               )
             ]),
             child: Container(
-              color: Colors.white,
+              color: Provider.of<DemoProvider>(context).themeMode ==
+                  ThemeMode.dark
+                  ? Colors.grey.shade900
+                  : Colors.white,
               height: MediaQuery.of(context).size.height * .38,
               width: double.infinity,
               margin: EdgeInsets.only(
@@ -159,7 +169,7 @@ Widget bodyTileCol(Articles article, BuildContext context) {
                   ),
                   Text(article.title,
                       style: TextStyle(
-                          color: Color(0xFFFF323C45),
+                         // color: Color(0xFFFF323C45),
                           fontSize: 16,
                           fontFamily: 'inter',
                           fontWeight: FontWeight.w600)),
@@ -200,7 +210,10 @@ Widget bodyTileCol(Articles article, BuildContext context) {
                               scale: 1.4,
                               child: SvgPicture.asset(
                                 'assets/svg/share.svg',
-                                color: Color(0xFFFF323C45),
+                                color:Provider.of<DemoProvider>(context).themeMode ==
+                                    ThemeMode.dark
+                                    ? Colors.white
+                                    : Color(0xFFFF323C45),
                               ),
                             ),
                             onTap: () {

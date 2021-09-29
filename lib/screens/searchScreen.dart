@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import 'package:welcome/provider/demoProvider.dart';
 
 class SearchScreen extends StatelessWidget {
   @override
@@ -7,7 +9,10 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Provider.of<DemoProvider>(context).themeMode ==
+            ThemeMode.dark
+            ? Colors.grey.shade900
+            : Colors.white,
         elevation: 1.5,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -19,7 +24,10 @@ class SearchScreen extends StatelessWidget {
             GestureDetector(
               child: Transform.scale(
                 scale: 1,
-                child: SvgPicture.asset('assets/svg/arrow.svg'),
+                child: SvgPicture.asset('assets/svg/arrow.svg',color:Provider.of<DemoProvider>(context).themeMode ==
+                    ThemeMode.dark
+                    ? Colors.white
+                    : null,),
               ),
               onTap: () {
                 Navigator.pop(context);
@@ -33,7 +41,10 @@ class SearchScreen extends StatelessWidget {
               'Search Tags',
               style: TextStyle(
                   fontSize: 14,
-                  color: Colors.grey,
+                  color:Provider.of<DemoProvider>(context).themeMode ==
+                      ThemeMode.dark
+                      ? Colors.white
+                      :  Colors.grey,
                   fontWeight: FontWeight.w500),
               textAlign: TextAlign.left,
             ),
@@ -50,7 +61,10 @@ class SearchScreen extends StatelessWidget {
             Text('Trending',
                 style: TextStyle(
                     fontSize: 13,
-                    color: Colors.grey,
+                    color: Provider.of<DemoProvider>(context).themeMode ==
+                        ThemeMode.dark
+                        ? Colors.white
+                        :  Colors.grey,
                     fontWeight: FontWeight.w400)),
             SizedBox(
               height: 20,
@@ -58,7 +72,10 @@ class SearchScreen extends StatelessWidget {
             Text('#gst',
                 style: TextStyle(
                     fontSize: 14,
-                    color: Colors.grey,
+                    color: Provider.of<DemoProvider>(context).themeMode ==
+                        ThemeMode.dark
+                        ? Colors.white
+                        :  Colors.grey,
                     fontWeight: FontWeight.w500)),
           ],
         ),

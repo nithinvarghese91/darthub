@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -14,6 +15,7 @@ import 'package:welcome/pages/gudes.dart';
 import 'package:welcome/provider/demoProvider.dart';
 import 'package:welcome/screens/calendar.dart';
 import 'package:welcome/screens/newsScreen.dart';
+import 'package:welcome/screens/noInternet.dart';
 import 'package:welcome/screens/searchScreen.dart';
 import 'package:welcome/screens/slider.dart';
 import 'package:welcome/services/api_service.dart';
@@ -22,10 +24,19 @@ import 'package:welcome/screens/drawerScreen.dart';
 ApiService client = ApiService();
 
 User user;
+
 roundIndicator() {
   Timer(const Duration(seconds: 5), () {
     BuildContext context;
     Provider.of<DemoProvider>(context, listen: false).circleColorChanger();
+  });
+}
+
+net() {
+  Timer(const Duration(seconds: 12), () {
+    BuildContext context;
+
+    //Provider.of<DemoProvider>(context, listen: false).circleColorChanger();
   });
 }
 
@@ -71,7 +82,7 @@ Widget MainBody(BuildContext context) {
                 GestureDetector(
                   child: Text("Gst News",
                       style: TextStyle(
-                          color: Color(0xFFFF323C45),
+                          //  color: Color(0xFFFF323C45),
                           fontSize: 14,
                           fontFamily: 'inter',
                           fontWeight: FontWeight.w600)),
@@ -114,15 +125,15 @@ Widget MainBody(BuildContext context) {
                 GestureDetector(
                   child: Text("Guides",
                       style: TextStyle(
-                          color: Color(0xFFFF323C45),
+                          //color: Color(0xFFFF323C45),
                           fontSize: 14,
                           fontFamily: 'inter',
                           fontWeight: FontWeight.w600)),
                   onTap: () {
                     Provider.of<DemoProvider>(context, listen: false)
                         .tabIndicator2();
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Guides()));
+                    // Navigator.pushReplacement(context,
+                    //     MaterialPageRoute(builder: (context) => CustomSliverAppbar()));
 
                     // setState(() async {
                     //   changeColor == 0;
@@ -291,8 +302,10 @@ Widget gstDirectory(BuildContext context) {
 
 //future builder snapshot data fetching
 Widget fetchedData({BuildContext context}) {
+
   return Expanded(
     child: FutureBuilder(
+
       future: client.getArticle(),
       builder: (BuildContext context,
           AsyncSnapshot<
@@ -311,14 +324,21 @@ Widget fetchedData({BuildContext context}) {
             //Now let's create our custom List tile
             itemCount: articles.length,
             itemBuilder: (context, index) {
+              Provider.of<DemoProvider>(context, listen: false)
+                  .tabIndicator1();
               print(articles.length);
               return bodyTileCol(articles[index], context);
             },
           );
         }
+        // var connectivityResult =  (Connectivity().checkConnectivity());
+        // bool checkOn;
+        // connectivityResult == ConnectivityResult.wifi?checkOn=true:checkOn=false;
+        // connectivityResult == ConnectivityResult.mobile?checkOn=true:checkOn=false;
         return Center(
-          child: CircularProgressIndicator(),
-        );
+            child:
+                CircularProgressIndicator());
+
       },
     ),
 
@@ -358,6 +378,10 @@ Material bottomColumn(
               scale: 1,
               child: SvgPicture.asset(
                 'assets/svg/$text',
+                color: Provider.of<DemoProvider>(context).themeMode ==
+                        ThemeMode.dark
+                    ? Colors.white
+                    : null,
               ),
             ),
             SizedBox(
@@ -366,9 +390,10 @@ Material bottomColumn(
             Text(
               textTwo,
               style: TextStyle(
-                  fontSize: 10,
-                  fontFamily: 'inter',
-                  color: Color(0xFFFF939393)),
+                fontSize: 10,
+                fontFamily: 'inter',
+                //color: Color(0xFFFF939393)
+              ),
             ),
             Spacer()
           ],
@@ -403,8 +428,12 @@ Material bottomColumn(
 
 Widget appBarMainPage(context) {
   return AppBar(
-    backgroundColor: Colors.white,
+    backgroundColor:
+        Provider.of<DemoProvider>(context).themeMode == ThemeMode.dark
+            ? Colors.grey.shade900
+            : Colors.white,
     elevation: 0,
+    //toolbarHeight:50 ,
     leading: Builder(
       builder: (BuildContext context) {
         return Transform.scale(
@@ -413,6 +442,10 @@ Widget appBarMainPage(context) {
           child: GestureDetector(
               child: SvgPicture.asset(
                 'assets/svg/person.svg',
+                color: Provider.of<DemoProvider>(context).themeMode ==
+                        ThemeMode.dark
+                    ? Colors.white
+                    : null,
               ),
               onTap: () {
                 print('drawer');
@@ -454,6 +487,10 @@ Widget appBarMainPage(context) {
               child: GestureDetector(
                 child: SvgPicture.asset(
                   'assets/svg/lens.svg',
+                  color: Provider.of<DemoProvider>(context).themeMode ==
+                          ThemeMode.dark
+                      ? Colors.white
+                      : null,
                 ),
                 onTap: () {
                   Navigator.push(context,
@@ -473,12 +510,18 @@ Widget bottomNavigation(BuildContext context) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 75,
-    decoration: BoxDecoration(color: Colors.white,
+    decoration: BoxDecoration(
+        color: Provider.of<DemoProvider>(context).themeMode == ThemeMode.dark
+            ? Colors.grey.shade900
+            : Colors.white,
         // border: Border.symmetric(
         //     horizontal: BorderSide(width: 2, color: Colors.grey[200]))
         boxShadow: [
           BoxShadow(
-              color: Colors.grey[200], //color of shadow
+              color:
+                  Provider.of<DemoProvider>(context).themeMode == ThemeMode.dark
+                      ? Colors.grey.shade900
+                      : Colors.grey[200], //color of shadow
               spreadRadius: 2, //spread radius
               blurRadius: .2, // blur radius
               offset: Offset(1.5, 0))

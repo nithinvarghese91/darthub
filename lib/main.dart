@@ -21,17 +21,23 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  @override
+  @override//
   Widget build(BuildContext context) {
+
     return ChangeNotifierProvider(
       create: (context) => DemoProvider(),
-      child: MaterialApp(
+    builder: (context, _) {
+    final  themeProvider = Provider.of<DemoProvider>(context);
+      return MaterialApp(
+        themeMode: themeProvider.themeMode,
+        theme: MyThemes.lightTheme,
+        darkTheme: MyThemes.darkTheme,
         //theme: ThemeData.dark(),
         //themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
         // theme: ThemeData.dark(),
-      ),
+      );}
     );
   }
 }

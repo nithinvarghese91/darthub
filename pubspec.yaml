@@ -41,7 +41,7 @@ dependencies:
   flutter_neat_and_clean_calendar: ^0.2.3+11
   flutter_share: ^2.0.0
   firebase_crashlytics: ^2.2.1
-  
+  connectivity: ^3.0.6
 
   
 dev_dependencies:

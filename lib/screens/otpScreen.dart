@@ -1,5 +1,6 @@
 // @dart=2.8
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,13 @@ class OTPScreen extends StatefulWidget {
 class _OTPScreenState extends State<OTPScreen> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   bool isValid = false;
+  //  void resendVerificationCode(String phoneNumber,
+  //      _firebaseAuth.ForceResendingToken token) {
+  //   PhoneAuthProvider.getInstance().verifyPhoneNumber(
+  //       phoneNumber,        // Phone number to verify
+  //       60,                 // Timeout duration
+  //       );             // ForceResendingToken from callbacks
+  // }
 
   Future<Null> validate(StateSetter updateState) async {
     print("in validate : ${widget.mobileNumber.length}");
@@ -103,7 +111,7 @@ class _OTPScreenState extends State<OTPScreen> {
     return Scaffold(
       appBar: AppBar(
         //  automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
           child: Transform.scale(
@@ -258,14 +266,13 @@ class _OTPScreenState extends State<OTPScreen> {
                   onPressed: () {
                     // validate((fn) {});
 
-                    if (isValid) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
                                 OTPScreen(mobileNumber: widget.mobileNumber),
                           ));
-                    }
+                   
                   },
                   child: Text(
                     "Resend OTP ",
